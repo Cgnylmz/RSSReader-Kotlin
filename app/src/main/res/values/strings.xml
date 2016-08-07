@@ -1,0 +1,8 @@
+<resources>
+    <!-- Application name -->
+    <string name="app_name">RSSReader</string>
+
+    <!-- Main Screen -->
+    <!-- Text on action button to start loading given RSS feed. -->
+    <string name="main_action_load">Load</string>
+</resources>
