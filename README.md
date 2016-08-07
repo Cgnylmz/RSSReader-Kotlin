@@ -15,30 +15,35 @@ Home page: https://kotlinlang.org
 * 100% interoperable with Java and libraries
 * classes are immutable by default
 * reduces boilerplate in your code
-    _for example:_
+
+_for example:_
+
 ```java
     class RSSFeedItem(val mTitle: String?, val mDescription: String?, val mLink: Uri?, val mPubDate: Long)
 ```
 
-    _instead of:_
+_instead of:_
+
 ```java
     public class RSSFeedItem {
         public final String mTitle;
         public final String mDescription;
         public final Uri mLink;
         public final long mPubDate;
-    
+
         public RSSFeedItem(String title, String description, Uri link, long pubDate) {
             mTitle = title;
             mDescription = description;
             mLink = link;
             mPubDate = pubDate;
         }
-        
+
         [<Getters>]
     }
 ```
+
 * smart casts
+
 ```java
     fun demo(object: Any) {
         if (object is SomeObject) {
@@ -46,5 +51,12 @@ Home page: https://kotlinlang.org
         }
     }
 ```
+
 * full Android Studio support
 * and the best at the end...no more NullPointerExceptions :)
+
+### Rx
+TBD
+
+### MVP (Model-View-Presenter)
+TBD
