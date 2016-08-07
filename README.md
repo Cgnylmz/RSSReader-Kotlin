@@ -3,12 +3,48 @@
 Small Android application to read RSS Feeds.
 
 ## Few words to start
-This project is mainly for learning purposes. I just wanted to learn/improve in new technologies and since it doesn't contain any secret information I decided to share it publicly.
-As the name of project says, it is written in Kotlin, Rx and uses MVP pattern. And the RSS reader is kind a simple app to start getting familiar with mentioned stuff. I'm sharing
-this project also because I'm not an expert, so I will appreciate any recommendations or best practices from all of you. Thank you in advance.
+This project is mainly for learning purposes. I just wanted to learn/improve in new technologies and since it doesn't contain any secret information I decided to share it publicly. As the name of project says, it is written in Kotlin, Rx and uses MVP pattern. And the RSS reader is kind a simple app to start getting familiar with mentioned stuff. I'm sharing this project also because I'm not an expert, so I will appreciate any recommendations/tips or best practices from all of you. Thank you in advance. And of course, maybe it will help somebody else to get started :)
 
-I think it's not necessary to describe why Kotlin, Rx and MVP now. This project is not about WHY. It's about the code, willing to learn and always be better in development (moving forward)
-and maybe it will help somebody to get started :)
+## Why Kotlin, Rx and MVP
+I won't describe Kotlin, Rx and MVP deeply. I'll mention only few things I think are useful for me.
 
-(But don't worry. I will update the README continuously so once I will have some spare time I will describe all WHY-es, where I get inspiration - mostly from other GitHub projects - and more
-about motivation to start this project.)
+### Kotlin
+Home page: https://kotlinlang.org
+
+* statically typed programming language for the JVM, Android and the browser
+* 100% interoperable with Java and libraries
+* classes are immutable by default
+* reduces boilerplate in your code
+    _for example:_
+```java
+    class RSSFeedItem(val mTitle: String?, val mDescription: String?, val mLink: Uri?, val mPubDate: Long)
+```
+
+    _instead of:_
+```java
+    public class RSSFeedItem {
+        public final String mTitle;
+        public final String mDescription;
+        public final Uri mLink;
+        public final long mPubDate;
+    
+        public RSSFeedItem(String title, String description, Uri link, long pubDate) {
+            mTitle = title;
+            mDescription = description;
+            mLink = link;
+            mPubDate = pubDate;
+        }
+        
+        [<Getters>]
+    }
+```
+* smart casts
+```java
+    fun demo(object: Any) {
+        if (object is SomeObject) {
+            object.doSomething() // object is automatically cast to SomeObject
+        }
+    }
+```
+* full Android Studio support
+* and the best at the end...no more NullPointerExceptions :)
