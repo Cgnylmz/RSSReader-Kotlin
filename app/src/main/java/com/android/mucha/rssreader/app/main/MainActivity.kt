@@ -1,9 +1,9 @@
 package com.android.mucha.rssreader.app.main
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.android.mucha.rssreader.R
+import com.android.mucha.rssreader.mvp.BasePresenterActivity
 import com.android.mucha.rssreader.rssloading.RSSFeedItem
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -12,16 +12,12 @@ import kotlinx.android.synthetic.main.activity_main.*
  *
  * @author Patrik Mucha
  */
-class MainActivity : AppCompatActivity(), MainView {
-
-    private var presenter: MainPresenter? = null
+class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView {
     private var rssFeedAdapter: RSSFeedRecyclerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        presenter = MainPresenterImpl(this)
 
         initViews()
     }
@@ -31,7 +27,7 @@ class MainActivity : AppCompatActivity(), MainView {
      */
     private fun initViews() {
         main_rss_url_load.setOnClickListener { view ->
-            presenter?.loadRSSFeed(main_rss_url.text.toString())
+            getPresenter()?.loadRSSFeed(main_rss_url.text.toString())
         }
 
         rssFeedAdapter = RSSFeedRecyclerAdapter(this)
@@ -41,6 +37,7 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     /* Overriden methods. */
+    override fun onCreatePresenter() = MainPresenter()
 
     override fun showRSSFeed(data: List<RSSFeedItem>) {
         main_rss_url.isEnabled = true

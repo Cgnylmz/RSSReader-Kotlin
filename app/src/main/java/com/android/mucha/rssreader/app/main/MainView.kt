@@ -1,5 +1,6 @@
 package com.android.mucha.rssreader.app.main
 
+import com.android.mucha.rssreader.mvp.MvpView
 import com.android.mucha.rssreader.rssloading.RSSFeedItem
 
 /**
@@ -7,7 +8,7 @@ import com.android.mucha.rssreader.rssloading.RSSFeedItem
  *
  * @author Patrik Mucha
  */
-interface MainView {
+interface MainView : MvpView {
 
     /**
      * Shows the loading progress while loading RSS Feed.
