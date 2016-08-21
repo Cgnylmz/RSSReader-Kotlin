@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Grid dimensions -->
+    <dimen name="grid_1">4dp</dimen>
+    <dimen name="grid_2">8dp</dimen>
+    <dimen name="grid_4">16dp</dimen>
+
+    <!-- Default horizontal margins -->
+    <dimen name="margin_horizontal">@dimen/grid_4</dimen>
+    <dimen name="margin_horizontal_small">@dimen/grid_2</dimen>
+
+    <!-- Default vertical margins -->
+    <dimen name="margin_vertical">@dimen/grid_4</dimen>
+    <dimen name="margin_vertical_small">@dimen/grid_2</dimen>
+    <dimen name="margin_vertical_xsmall">@dimen/grid_1</dimen>
+
+</resources>

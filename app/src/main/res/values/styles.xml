@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Text appearances -->
+    <style name="TextAppearance.Small" parent="TextAppearance.AppCompat.Small">
+    </style>
+
+    <style name="TextAppearance.Feed.Cardview" parent="TextAppearance.Small">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextAppearance.Feed.Cardview.Title">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Feed.Cardview.Description">
+    </style>
+
+    <style name="TextAppearance.Feed.Cardview.Date">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+</resources>
