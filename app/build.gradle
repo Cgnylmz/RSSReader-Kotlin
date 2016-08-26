@@ -35,12 +35,16 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${SUPPORT_VERSION}"
 
     // Third-party libs
+    compile "com.google.dagger:dagger:${DAGGER_VERSION}"
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'io.reactivex:rxandroid:1.2.1'
     // Because RxAndroid releases are few and far between, it is recommended you also
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     compile 'io.reactivex:rxjava:1.1.8'
     compile "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
+
+    // Provided
+    kapt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
 
     testCompile 'junit:junit:4.12'
 }
