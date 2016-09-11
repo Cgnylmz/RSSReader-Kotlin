@@ -36,6 +36,7 @@ dependencies {
 
     // Third-party libs
     compile "com.google.dagger:dagger:${DAGGER_VERSION}"
+    compile 'com.j256.ormlite:ormlite-android:5.0'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'io.reactivex:rxandroid:1.2.1'
     // Because RxAndroid releases are few and far between, it is recommended you also
