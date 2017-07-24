@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Common string attributes. -->
+    <attr name="rowTitle" format="string|reference" />
+    <attr name="rowSubtitle" format="string|reference" />
+
+    <attr name="settingsRowViewStyle" format="reference" />
+    <declare-styleable name="SettingsRowView">
+        <attr name="rowTitle" />
+        <attr name="rowSubtitle" />
+    </declare-styleable>
+
+</resources>

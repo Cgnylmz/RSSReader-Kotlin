@@ -50,7 +50,7 @@ class RSSXmlHandler : DefaultHandler() {
      * @param qName The element name.
      * @param value The value of element.
      */
-    fun setFeedItemElement(qName: String?, value: String?) {
+    fun setFeedItemElement(qName: String, value: String) {
         when (qName) {
             RSSFeedItem.ELEMENT_TITLE -> rssFeedItemBuilder?.title(value)
             RSSFeedItem.ELEMENT_DESCRIPTION -> rssFeedItemBuilder?.description(value)

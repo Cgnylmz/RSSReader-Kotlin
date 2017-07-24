@@ -5,4 +5,14 @@
     <!-- Main Screen -->
     <!-- Text on action button to start loading given RSS feed. -->
     <string name="main_action_load">Load</string>
+
+    <!-- Settings -->
+    <!-- Label for Settings screen. -->
+    <string name="settings_title">Settings</string>
+    <!-- Title for Feed Settings. -->
+    <string name="settings_feeds_title">Feeds</string>
+    <!-- Subtitle for Feed Settings. -->
+    <string name="settings_feeds_subtitle">Manage your favorite feeds</string>
+    <!-- Action label. Adds new Feed into list. -->
+    <string name="settings_feeds_add_action">Add</string>
 </resources>

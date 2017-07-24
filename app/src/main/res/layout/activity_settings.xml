@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:id="@+id/activity_settings"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.android.mucha.rssreader.app.settings.SettingsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.android.mucha.rssreader.view.SettingsRowView
+            android:id="@+id/settings_feeds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:rowSubtitle="@string/settings_feeds_subtitle"
+            app:rowTitle="@string/settings_feeds_title" />
+    </LinearLayout>
+</ScrollView>

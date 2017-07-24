@@ -13,13 +13,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".app.main.MainActivity">
+        <activity
+            android:name=".app.main.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Settings -->
+        <activity
+            android:name=".app.settings.SettingsActivity"
+            android:label="@string/settings_title"
+            android:launchMode="singleTop"
+            android:parentActivityName="com.android.mucha.rssreader.app.main.MainActivity" />
+
+        <activity
+            android:name=".app.settings.SettingsFeedsActivity"
+            android:label="@string/settings_feeds_title"
+            android:launchMode="singleTop"
+            android:parentActivityName="com.android.mucha.rssreader.app.settings.SettingsActivity" />
     </application>
 
 </manifest>

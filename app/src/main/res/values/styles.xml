@@ -19,4 +19,13 @@
     <style name="TextAppearance.Feed.Cardview.Date">
         <item name="android:textColor">@color/gray</item>
     </style>
+
+    <style name="View">
+    </style>
+
+    <style name="View.SettingsRowView">
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:padding">@dimen/grid_4</item>
+    </style>
+
 </resources>

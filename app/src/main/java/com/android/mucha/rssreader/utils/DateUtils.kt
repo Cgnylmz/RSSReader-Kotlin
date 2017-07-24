@@ -29,7 +29,7 @@ class DateUtils {
          * @param dateString The string representation of date. Must be in [RFC822]() format.
          * @return The date in millis, or -1 if the date format is invalid.
          */
-        fun parseDateFromRFC822(dateString: String?): Long {
+        fun parseDateFromRFC822(dateString: String): Long {
             try {
                 return SimpleDateFormat(RFC822_DATE_FORMAT, Locale.ENGLISH).parse(dateString).time
             } catch (e: ParseException) {

@@ -15,4 +15,6 @@
     <dimen name="margin_vertical_small">@dimen/grid_2</dimen>
     <dimen name="margin_vertical_xsmall">@dimen/grid_1</dimen>
 
+    <dimen name="mtrl_lists_title_text_size">16sp</dimen>
+    <dimen name="mtrl_lists_subtitle_text_size">14sp</dimen>
 </resources>

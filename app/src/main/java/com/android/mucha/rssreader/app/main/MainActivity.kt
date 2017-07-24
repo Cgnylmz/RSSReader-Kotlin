@@ -1,8 +1,12 @@
 package com.android.mucha.rssreader.app.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import com.android.mucha.rssreader.R
+import com.android.mucha.rssreader.app.settings.SettingsActivity
 import com.android.mucha.rssreader.mvp.BasePresenterActivity
 import com.android.mucha.rssreader.rssloading.RSSFeedItem
 import kotlinx.android.synthetic.main.activity_main.*
@@ -54,5 +58,20 @@ class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView 
     override fun showError() {
         main_rss_url.isEnabled = true
         main_rss_url_load.isEnabled = true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_settings -> {
+                startActivity(Intent(this, SettingsActivity::class.java))
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
