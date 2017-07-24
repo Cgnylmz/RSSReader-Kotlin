@@ -1,29 +1,35 @@
 package com.android.mucha.rssreader.database.model
 
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import android.provider.BaseColumns
-import com.android.mucha.rssreader.database.dao.RSSFeedModelDaoImpl
-import com.j256.ormlite.field.DatabaseField
-import com.j256.ormlite.table.DatabaseTable
 
 /**
  * Model to store RSS Feed info.
  *
  * @author Patrik Mucha
  */
-@DatabaseTable(tableName = RSSFeedModel.TABLE_NAME, daoClass = RSSFeedModelDaoImpl::class)
+@Entity(tableName = RSSFeedModel.TABLE_NAME)
 class RSSFeedModel {
 
-    @DatabaseField(generatedId = true, columnName = COLUMN_ID)
-    var mId: Int? = null
-        private set
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = COLUMN_ID)
+    var mId: Int = 0
+        get set
 
-    @DatabaseField(columnName = COLUMN_FEED_URI)
-    val mUri: String
+    @ColumnInfo(name = COLUMN_FEED_URI)
+    var mUri: String? = null
+        get set
 
-    @DatabaseField(columnName = COLUMN_FEED_NAME)
-    val mName: String
+    @ColumnInfo(name = COLUMN_FEED_NAME)
+    var mName: String? = null
+        get set
 
-    constructor(uri: String, name: String) {
+    constructor()
+
+    constructor(id: Int, uri: String, name: String) {
+        mId = id;
         mUri = uri
         mName = name
     }

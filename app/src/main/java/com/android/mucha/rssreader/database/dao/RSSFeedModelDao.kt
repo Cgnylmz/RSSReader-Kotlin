@@ -1,12 +1,26 @@
 package com.android.mucha.rssreader.database.dao
 
+import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Delete
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.Query
 import com.android.mucha.rssreader.database.model.RSSFeedModel
-import com.j256.ormlite.dao.Dao
+
 
 /**
  * Dao interface for [RSSFeedModel].
  *
  * @author Patrik Mucha
  */
-interface RSSFeedModelDao : Dao<RSSFeedModel, Int> {
+@Dao
+interface RSSFeedModelDao {
+
+    @Query("SELECT * FROM feeds")
+    fun getAllFeeds(): List<RSSFeedModel>
+
+    @Insert
+    fun insertAll(vararg rssFeeds: RSSFeedModel)
+
+    @Delete
+    fun delete(rssFeed: RSSFeedModel)
 }

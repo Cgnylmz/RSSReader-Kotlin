@@ -10,7 +10,7 @@ import android.content.Context
  */
 class RSSReaderApplication : Application() {
 
-    var mApplicationComponent: AppComponent? = null
+    lateinit var mApplicationComponent: AppComponent
         private set
 
     override fun onCreate() {

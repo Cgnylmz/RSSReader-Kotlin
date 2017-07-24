@@ -1,10 +1,11 @@
 package com.android.mucha.rssreader.database
 
+import android.arch.persistence.room.Room
+import android.content.Context
+import com.android.mucha.rssreader.dagger.ForApplication
 import com.android.mucha.rssreader.database.dao.RSSFeedModelDao
-import com.android.mucha.rssreader.database.model.RSSFeedModel
 import dagger.Module
 import dagger.Provides
-import java.sql.SQLException
 import javax.inject.Singleton
 
 /**
@@ -17,11 +18,12 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideRSSFeedModelDao(databaseHelper: DatabaseHelper): RSSFeedModelDao {
-        try {
-            return databaseHelper.getDao(RSSFeedModel::class.java)
-        } catch(e: SQLException) {
-            throw RuntimeException("Can't create RSSFeedModelDao.", e)
-        }
+    fun provideDatabase(@ForApplication context: Context): AppDatabase {
+        return Room.databaseBuilder(context, AppDatabase::class.java, AppDatabase.DATABASE_NAME).build();
+    }
+
+    @Provides
+    fun provideRSSFeedModelDao(database: AppDatabase): RSSFeedModelDao {
+        return database.rssFeedModelDao
     }
 }
