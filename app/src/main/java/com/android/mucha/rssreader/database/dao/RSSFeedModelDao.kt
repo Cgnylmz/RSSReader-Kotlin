@@ -1,5 +1,6 @@
 package com.android.mucha.rssreader.database.dao
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
@@ -16,7 +17,7 @@ import com.android.mucha.rssreader.database.model.RSSFeedModel
 interface RSSFeedModelDao {
 
     @Query("SELECT * FROM feeds")
-    fun getAllFeeds(): List<RSSFeedModel>
+    fun getAllFeeds(): LiveData<List<RSSFeedModel>>
 
     @Insert
     fun insertAll(vararg rssFeeds: RSSFeedModel)

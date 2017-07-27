@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "com.android.mucha.rssreader"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
 
@@ -32,7 +32,9 @@ kapt {
 
 dependencies {
     // Android libs
-    compile "android.arch.persistence.room:runtime:${ROOM_VERSION}"
+    compile "android.arch.lifecycle:runtime:${ARCH_COMPONENTS_VERSION}"
+    compile "android.arch.lifecycle:extensions:${ARCH_COMPONENTS_VERSION}"
+    compile "android.arch.persistence.room:runtime:${ARCH_COMPONENTS_VERSION}"
 
     // Support libs
     compile "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
@@ -50,7 +52,8 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
 
     // Provided
-    kapt "android.arch.persistence.room:compiler:${ROOM_VERSION}"
+    kapt "android.arch.lifecycle:compiler:${ARCH_COMPONENTS_VERSION}"
+    kapt "android.arch.persistence.room:compiler:${ARCH_COMPONENTS_VERSION}"
     kapt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
 
     // Android Tests

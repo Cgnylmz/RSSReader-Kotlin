@@ -5,9 +5,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.android.mucha.rssreader.R
+import com.android.mucha.rssreader.database.model.RSSFeedModel
 
 /**
- * Holds the list of [SettingsFeedsItem]s.
+ * Holds the list of [RSSFeedModel] items.
  *
  * @author Patrik Mucha
  */
@@ -25,7 +26,7 @@ class SettingsFeedsRecyclerAdapter(context: Context) : RecyclerView.Adapter<Sett
         fun onNewUrlAdded(url: String)
     }
 
-    private val mItems = mutableListOf<SettingsFeedsItem>()
+    private val mItems = mutableListOf<RSSFeedModel>()
     private val mLayoutInflater: LayoutInflater = LayoutInflater.from(context)
 
     private var mAdapterCallbacks: AdapterCallbacks? = null
@@ -71,7 +72,7 @@ class SettingsFeedsRecyclerAdapter(context: Context) : RecyclerView.Adapter<Sett
      *
      * @param data The data to be shown. Null will clear the list.
      */
-    fun setData(data: List<SettingsFeedsItem>?) {
+    fun setData(data: List<RSSFeedModel>?) {
         mItems.clear()
         if (data != null) {
             mItems.addAll(data)
@@ -84,7 +85,7 @@ class SettingsFeedsRecyclerAdapter(context: Context) : RecyclerView.Adapter<Sett
      *
      * @param callbacks The callbacks implementation.
      */
-    fun setAdapterCallbacks(callbacks: AdapterCallbacks) {
+    fun setAdapterCallbacks(callbacks: AdapterCallbacks?) {
         mAdapterCallbacks = callbacks
     }
 

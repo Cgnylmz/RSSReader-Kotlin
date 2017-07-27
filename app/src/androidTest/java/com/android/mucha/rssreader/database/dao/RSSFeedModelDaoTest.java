@@ -8,6 +8,7 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.android.mucha.rssreader.LiveDataTestUtils;
 import com.android.mucha.rssreader.database.AppDatabase;
 import com.android.mucha.rssreader.database.model.RSSFeedModel;
 import org.junit.After;
@@ -17,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Test for {@link RSSFeedModelDao}.
+ * Tests for {@link RSSFeedModelDao}.
  *
  * @author Patrik Mucha
  */
@@ -40,13 +41,13 @@ public class RSSFeedModelDaoTest {
     }
 
     @Test
-    public void addSingleRecordAndCheckListSize() throws Exception {
+    public void addSingleRecordAndCheckListSize() throws InterruptedException {
         RSSFeedModel rssFeed = new RSSFeedModel();
         rssFeed.setMName("My Feed");
         rssFeed.setMUri("http://some.uri");
         mDao.insertAll(rssFeed);
 
-        final List<RSSFeedModel> feeds = mDao.getAllFeeds();
+        final List<RSSFeedModel> feeds = LiveDataTestUtils.getValue(mDao.getAllFeeds());
         Assert.assertEquals("There should be only one record in the table.", feeds.size(), 1);
     }
 }
