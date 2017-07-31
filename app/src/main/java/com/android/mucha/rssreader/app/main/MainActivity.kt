@@ -1,25 +1,37 @@
 package com.android.mucha.rssreader.app.main
 
+import android.arch.lifecycle.LifecycleActivity
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import com.android.mucha.rssreader.R
+import com.android.mucha.rssreader.RSSReaderApplication
 import com.android.mucha.rssreader.app.settings.SettingsActivity
-import com.android.mucha.rssreader.mvp.BasePresenterActivity
-import com.android.mucha.rssreader.rssloading.RSSFeedItem
+import com.android.mucha.rssreader.rssloading.RSSFeedRepository
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 /**
  * Main activity class.
  *
  * @author Patrik Mucha
  */
-class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView {
-    private var rssFeedAdapter: RSSFeedRecyclerAdapter? = null
+class MainActivity : LifecycleActivity() {
+
+    @Inject
+    lateinit var mRssFeedRepository: RSSFeedRepository
+
+    private var mAdapter: RSSFeedRecyclerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        RSSReaderApplication[this].mApplicationComponent.injectMainActivity(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -30,34 +42,32 @@ class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView 
      * Initializes views for the activity.
      */
     private fun initViews() {
-        main_rss_url_load.setOnClickListener { view ->
-            getPresenter()?.loadRSSFeed(main_rss_url.text.toString())
-        }
-
-        rssFeedAdapter = RSSFeedRecyclerAdapter(this)
+        mAdapter = RSSFeedRecyclerAdapter(this)
         main_rss_feed.layoutManager = LinearLayoutManager(this)
         main_rss_feed.setHasFixedSize(true)
-        main_rss_feed.adapter = rssFeedAdapter
-    }
+        main_rss_feed.adapter = mAdapter
 
-    /* Overriden methods. */
-    override fun onCreatePresenter() = MainPresenter()
+        val viewModel = ViewModelProviders.of(this, object: ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>?): T {
+                // TODO: Create some factory class. This code will be mostly the same.
+                @Suppress("UNCHECKED_CAST")
+                return MainViewModel(mRssFeedRepository) as T
+            }
 
-    override fun showRSSFeed(data: List<RSSFeedItem>) {
-        main_rss_url.isEnabled = true
-        main_rss_url_load.isEnabled = true
-        rssFeedAdapter?.setData(data)
-    }
+        })[MainViewModel::class.java]
+        viewModel.getFeed().observe(this, Observer {
+            main_rss_url.isEnabled = true
+            main_rss_url_load.isEnabled = true
 
-    override fun showLoadingProgress() {
-        main_rss_url.isEnabled = false
-        main_rss_url_load.isEnabled = false
-        rssFeedAdapter?.setData(emptyList())
-    }
+            mAdapter?.setData(it?.mFeedItems)
+        })
 
-    override fun showError() {
-        main_rss_url.isEnabled = true
-        main_rss_url_load.isEnabled = true
+        main_rss_url_load.setOnClickListener { view ->
+            main_rss_url.isEnabled = false
+            main_rss_url_load.isEnabled = false
+
+            viewModel.setFeedUrl(main_rss_url.text.toString())
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
