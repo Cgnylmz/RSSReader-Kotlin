@@ -1,15 +1,16 @@
 package com.android.mucha.rssreader.app.settings
 
-import android.arch.lifecycle.*
+import android.arch.lifecycle.LifecycleActivity
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import com.android.mucha.rssreader.R
 import com.android.mucha.rssreader.RSSReaderApplication
-import com.android.mucha.rssreader.database.dao.RSSFeedModelDao
+import com.android.mucha.rssreader.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_settings_feeds.*
 import javax.inject.Inject
-
 
 /**
  * Screen with Feeds.
@@ -19,7 +20,7 @@ import javax.inject.Inject
 class SettingsFeedsActivity : LifecycleActivity() {
 
     @Inject
-    lateinit var mRssFeedModelDao: RSSFeedModelDao
+    lateinit var mViewModelFactory: ViewModelFactory
 
     private var mAdapter: SettingsFeedsRecyclerAdapter? = null
 
@@ -54,14 +55,7 @@ class SettingsFeedsActivity : LifecycleActivity() {
      * Loads the list of Feeds.
      */
     private fun loadFeeds() {
-        val viewModel = ViewModelProviders.of(this, object: ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>?): T {
-                // TODO: Create some factory class. This code will be mostly the same.
-                @Suppress("UNCHECKED_CAST")
-                return SettingsFeedsViewModel(mRssFeedModelDao) as T
-            }
-
-        })[SettingsFeedsViewModel::class.java]
+        val viewModel = ViewModelProviders.of(this, mViewModelFactory)[SettingsFeedsViewModel::class.java]
         viewModel.getFeeds().observe(this, Observer {
             mAdapter?.setData(it)
         })

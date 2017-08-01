@@ -2,8 +2,6 @@ package com.android.mucha.rssreader.app.main
 
 import android.arch.lifecycle.LifecycleActivity
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +11,7 @@ import android.view.MenuItem
 import com.android.mucha.rssreader.R
 import com.android.mucha.rssreader.RSSReaderApplication
 import com.android.mucha.rssreader.app.settings.SettingsActivity
-import com.android.mucha.rssreader.rssloading.RSSFeedRepository
+import com.android.mucha.rssreader.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -25,7 +23,7 @@ import javax.inject.Inject
 class MainActivity : LifecycleActivity() {
 
     @Inject
-    lateinit var mRssFeedRepository: RSSFeedRepository
+    lateinit var mViewModelFactory: ViewModelFactory
 
     private var mAdapter: RSSFeedRecyclerAdapter? = null
 
@@ -47,14 +45,7 @@ class MainActivity : LifecycleActivity() {
         main_rss_feed.setHasFixedSize(true)
         main_rss_feed.adapter = mAdapter
 
-        val viewModel = ViewModelProviders.of(this, object: ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>?): T {
-                // TODO: Create some factory class. This code will be mostly the same.
-                @Suppress("UNCHECKED_CAST")
-                return MainViewModel(mRssFeedRepository) as T
-            }
-
-        })[MainViewModel::class.java]
+        val viewModel = ViewModelProviders.of(this, mViewModelFactory)[MainViewModel::class.java]
         viewModel.getFeed().observe(this, Observer {
             main_rss_url.isEnabled = true
             main_rss_url_load.isEnabled = true
