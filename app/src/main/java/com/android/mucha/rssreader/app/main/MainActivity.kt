@@ -9,9 +9,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import com.android.mucha.rssreader.R
-import com.android.mucha.rssreader.RSSReaderApplication
 import com.android.mucha.rssreader.app.settings.SettingsActivity
 import com.android.mucha.rssreader.viewmodel.ViewModelFactory
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -28,7 +28,7 @@ class MainActivity : LifecycleActivity() {
     private var mAdapter: RSSFeedRecyclerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        RSSReaderApplication[this].mApplicationComponent.injectMainActivity(this)
+        AndroidInjection.inject(this);
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

@@ -1,19 +1,32 @@
 package com.android.mucha.rssreader
 
-import com.android.mucha.rssreader.app.main.MainActivity
-import com.android.mucha.rssreader.app.settings.SettingsFeedsActivity
+import android.app.Application
+import com.android.mucha.rssreader.app.main.MainActivityModule
+import com.android.mucha.rssreader.app.settings.SettingsFeedsActivityModule
 import com.android.mucha.rssreader.database.DatabaseModule
 import com.android.mucha.rssreader.viewmodel.ViewModelModule
+import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
+
 @Component(modules = arrayOf(
-        AppModule::class,
+        AndroidInjectionModule::class,
         DatabaseModule::class,
-        ViewModelModule::class
+        ViewModelModule::class,
+
+        // Activity Modules
+        MainActivityModule::class,
+        SettingsFeedsActivityModule::class
 ))
 @Singleton
 interface AppComponent {
-    fun injectMainActivity(activity: MainActivity)
-    fun injectSettingsFeedActivity(activity: SettingsFeedsActivity)
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        fun application(application: Application): Builder
+        fun build(): AppComponent
+    }
+    fun inject(application: RSSReaderApplication)
 }

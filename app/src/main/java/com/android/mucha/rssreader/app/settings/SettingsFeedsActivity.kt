@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import com.android.mucha.rssreader.R
-import com.android.mucha.rssreader.RSSReaderApplication
 import com.android.mucha.rssreader.viewmodel.ViewModelFactory
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_settings_feeds.*
 import javax.inject.Inject
 
@@ -25,7 +25,7 @@ class SettingsFeedsActivity : LifecycleActivity() {
     private var mAdapter: SettingsFeedsRecyclerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        RSSReaderApplication[this].mApplicationComponent.injectSettingsFeedActivity(this)
+        AndroidInjection.inject(this)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings_feeds)
